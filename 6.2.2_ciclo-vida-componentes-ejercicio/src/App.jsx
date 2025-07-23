@@ -10,7 +10,7 @@ function App() {
 
   // Efecto de montaje y desmontaje
   useEffect(() => {
-    console.log("\u00a1El panel de control est\u00e1 listo!");
+    console.log("\El panel de control está listo!");
 
     const intervalo = setInterval(() => {
       setDistancia(prev => prev + 10);
@@ -25,7 +25,7 @@ function App() {
 
   // Efecto cuando cambia el combustible
   useEffect(() => {
-    console.log("\u00a1Combustible actualizado!");
+    console.log("\Combustible actualizado!");
   }, [combustible]);
 
   const mensajeEstado = useMemo(() => {
