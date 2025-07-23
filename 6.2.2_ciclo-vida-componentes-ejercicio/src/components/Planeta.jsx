@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function Planeta({ nombre }) {
+function Planeta({ nombre, handleDelete }) {
   useEffect(() => {
     console.log(`¡El planeta ${nombre} ha aparecido!`);
     return () => {
@@ -8,7 +8,13 @@ function Planeta({ nombre }) {
     };
   }, [nombre]);
 
-  return <li>{nombre}</li>;
+  return (
+  <li>
+    {nombre}
+    <button onClick={handleDelete}>
+      Eliminar
+    </button>
+  </li>);
 }
 
 export default Planeta;

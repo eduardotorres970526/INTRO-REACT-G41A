@@ -1,16 +1,16 @@
+// src/App.jsx
 import React, { useState, useEffect, useMemo } from 'react';
 import Planeta from './components/Planeta';
 
 function App() {
-  // Estado de la nave
   const [distancia, setDistancia] = useState(0);
   const [combustible, setCombustible] = useState(100);
   const [estadoNave, setEstadoNave] = useState("En órbita");
   const [planetasVisitados, setPlanetasVisitados] = useState([]);
 
-  // Efecto al montar el componente
+  // Efecto de montaje y desmontaje
   useEffect(() => {
-    console.log("¡El panel de control está listo!");
+    console.log("\u00a1El panel de control est\u00e1 listo!");
 
     const intervalo = setInterval(() => {
       setDistancia(prev => prev + 10);
@@ -25,25 +25,24 @@ function App() {
 
   // Efecto cuando cambia el combustible
   useEffect(() => {
-    console.log("¡Combustible actualizado!");
+    console.log("\u00a1Combustible actualizado!");
   }, [combustible]);
 
-  // Memoización del mensaje de estado
   const mensajeEstado = useMemo(() => {
     return `Estado: ${estadoNave}`;
   }, [estadoNave]);
 
-  // Función para aterrizar
   const aterrizar = () => {
     setEstadoNave("Aterrizando");
-    setPlanetasVisitados(prev => [
-      ...prev,
-      `Planeta ${planetasVisitados.length + 1}`,
-    ]);
+    setPlanetasVisitados(prev => [...prev, {id: crypto.randomUUID(), nombre:`Planeta ${prev.length + 1}`}]);
+  };
+
+  const eliminarPlaneta = (id) => {
+    setPlanetasVisitados(prev => prev.filter(planeta => planeta.id !== id));
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: '20px' }}>
       <h1>Panel de Control</h1>
       <p>Distancia: {distancia} km</p>
       <p>Combustible: {combustible}%</p>
@@ -52,8 +51,12 @@ function App() {
 
       <h2>Planetas Visitados</h2>
       <ul>
-        {planetasVisitados.map((planeta, index) => (
-          <Planeta key={index} nombre={planeta} />
+        {planetasVisitados.map((planeta) => (
+            <Planeta 
+            key={planeta.id}
+            nombre={planeta.nombre}
+            handleDelete={() => eliminarPlaneta(planeta.id)}
+            />
         ))}
       </ul>
     </div>
