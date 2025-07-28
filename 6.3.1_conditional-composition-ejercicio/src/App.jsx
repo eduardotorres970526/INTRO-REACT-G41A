@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import InputNumber from './components/InputNumber';
+import RestartButton from './components/RestartButton';
+import Message from './components/Message';
 import './App.css';
 
 function App() {
@@ -53,8 +55,9 @@ const [numeroIngresado, setNumeroIngresado] = useState("")
       handleChange={manejarCambio}
       />
       <button onClick={verificarNumero}>Adivinar número</button>
-      {respuesta && <p><b>{respuesta}</b></p>}
-      <button onClick={reiniciarTodo}>Reiniciar juego</button>
+      <Message
+      mensaje={respuesta}
+      />
      </div>
   )
  
