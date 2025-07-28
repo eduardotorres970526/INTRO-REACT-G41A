@@ -11,11 +11,15 @@ const [respuesta, setRespuesta] = useState("");
 const [numeroIngresado, setNumeroIngresado] = useState("")
 
 
-
-   useEffect(() => {
+   const generarNumero = () => {
     const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
     setNumGuardado(numeroAleatorio);
     console.log("Número secreto", numeroAleatorio)
+   }
+
+
+   useEffect(() => {
+      generarNumero()
    },[]) 
 
    const manejarCambio = (e) => {
@@ -39,7 +43,7 @@ const [numeroIngresado, setNumeroIngresado] = useState("")
    }
 
    const reiniciarTodo = () => {
-    setNumGuardado(null);
+    generarNumero()
     setNumeroIngresado("");
     setRespuesta("");
    }
@@ -58,6 +62,7 @@ const [numeroIngresado, setNumeroIngresado] = useState("")
       <Message
       mensaje={respuesta}
       />
+      <RestartButton reestablecer={reiniciarTodo}/>
      </div>
   )
  
